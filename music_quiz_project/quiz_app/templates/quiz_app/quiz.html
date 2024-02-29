@@ -1,0 +1,45 @@
+{% extends 'quiz_app/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block css %}
+    <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
+    <link href="https://storage.googleapis.com/chydlx/plugins/dlx-quiz/css/main.css" rel="stylesheet"> 
+    <style>
+        img {
+            max-width: 100%;
+        }
+        .container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          background: #03adad;
+        }
+
+        #quiz1 {
+          width: 560px;
+          background: #e8fcfc;
+          padding: 2rem;
+          border-radius: 3px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %} 
+    <div class="container">
+        <div id="quiz1"></div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://storage.googleapis.com/chydlx/plugins/dlx-quiz/js/main.js"></script> 
+    <script>
+$("#quiz1").dlxQuiz({
+    quizData: {{ quiz_data }}
+});
+    </script>
+{% endblock %}

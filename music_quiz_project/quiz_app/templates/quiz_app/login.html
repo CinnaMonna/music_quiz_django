@@ -1,0 +1,15 @@
+{% extends 'quiz_app/base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %} 
+<div class="container jumbotron">
+    <form method="POST" action="" >
+        {% csrf_token %}
+        <p><input type="text" name="username" placeholder="Имя..."></p>
+        <p><input type="password" name="password" placeholder="Пароль..." ></p>
+        <input class="btn btn-success" type="submit" value="Войти">
+        <p>Еще нет аккаунта? <a href='{% url 'register' %}'>Зарегистрироваться</a></p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'quiz_app/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %} 
+    <a class="btn btn-primary" href="{% url 'login' %}">Войти в аккаунт</a>
+    {% if request.user.is_authenticated %}
+        {% if request.user.profile.is_teacher %}    
+            <a class="greet">Выполнен вход, преподаватель: {{request.user}}</a><br/>
+        {% elif request.user.is_superuser %}
+            <a class="greet">Выполнен вход, администратор: {{request.user}}</a><br/>
+        {% else %}
+            <a class="greet">Выполнен вход, пользователь: {{request.user}}</a><br/>
+        {% endif %}
+    {% else %}
+        <a class="greet">Вход не выполнен</a><br/>
+    {% endif %}
+    <a class="btn btn-primary" href="{% url 'logout' %}">Выйти из аккаунта</a><br/>
+    {% if request.user.profile.is_teacher %}
+        <a class="btn btn-primary" href="{% url 'addquiz' %}">Создать викторину</a><br/>
+        <a class="btn btn-primary" href="{% url 'addquestion' %}">Добавить вопрос в викторину</a><br/>
+    {% endif %}
+    
+    <h1>Категории</h1>
+    <div>
+        {% for category in categories %}
+            <h2><a href="{% url 'cat' category.slug %}">{{ category.title }}</a></h2>
+            {{ category.description | linebreaks }}
+        {% endfor %}
+    </div>
+{% endblock %}
