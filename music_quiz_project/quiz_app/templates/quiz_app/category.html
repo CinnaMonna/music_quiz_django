@@ -1,17 +1,13 @@
 {% extends 'quiz_app/base.html' %}
-{% block content %}
 
-    <h1>{{ category.title }}</h1>
-    {{ category.description | linebreaks }}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %} 
+    <h1>Викторины. {{ category.title }}</h1>
     <div>
-        {% for quiz in quizs %}
-            <h2>
-                <a href="{{ quiz.get_absolute_url }}">
-                    {{ quiz.title }}
-                </a>
-            </h2>
+        {% for quiz in quizzes %}
+            <h2><a href="{% url 'quiz' category.slug  quiz.slug %}">{{ quiz.title }}</a></h2>
             {{ quiz.description | linebreaks }}
         {% endfor %}
     </div>
-
 {% endblock %}
